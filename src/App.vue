@@ -21,14 +21,22 @@
               </option>
             </select>
           </div>
-
           <div class="col-sm-6">
-            <select v-model="selectedColor" class="form-select mb-3" name="color" id="color"
-                    aria-label="Default select example" required>
-              <option v-for="(option, index) in optionsColor" :key="index" :value="option.value">
-                {{ option.text }}
-              </option>
-            </select>
+            <div class="row mb-3">
+              <div class="col-9">
+                <select v-model="selectedColor" class="form-select" name="color" id="color"
+                        aria-label="Default select example" required>
+                  <option v-for="(option, index) in optionsColor" :key="index" :value="option.value">
+                    {{ option.text }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-3 text-center">
+                <div class="mx-auto my-auto" :style="backgroundColor"
+                     style="border: solid 1px black; border-radius: 50%; width: 30px; height: 30px;">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -40,10 +48,12 @@
         </div>
 
         <div class="p-2 mb-2 border rounded-3">
-          {{ titulo }} {{ selectedFiltro }} {{ selectedColor }} {{ tamanio }}
+          <i class="fa-solid fa-cat fa-3x"></i> nombre: <b>{{ titulo }}</b>, filtro: <b>{{ selectedFiltro }}</b>,
+          color <b>{{ selectedColor }}</b>, tamaño: <b>{{ tamanio }}</b>
         </div>
 
-        <button @click.prevent="llamarCat(titulo, filtro, color, tamanio)" type="submit"
+        <button @click.prevent="llamarCat(titulo, selectedFiltro, selectedColor, tamanio)"
+                type="submit"
                 class="btn btn-primary">
           <i class="fas fa-search"></i>
           Buscar Cat
@@ -71,8 +81,6 @@
       return {
         cat: '',
         titulo: '',
-        filtro: '',
-        color: '',
         tamanio: '',
         selectedColor: '',
         optionsColor: [
@@ -95,13 +103,16 @@
         isLoaded: false,
       }
     },
-
+    computed: {
+      backgroundColor() {
+        return {
+          'background-color': this.selectedColor,
+          'color': this.selectedColor
+        }
+      }
+    },
     methods: {
       async llamarCat(ti, fi, co, ta) {
-        console.log(this.titulo)
-        console.log(this.selectedFiltro)
-        console.log(this.selectedColor)
-        console.log(this.tamanio)
         if (this.titulo && this.selectedFiltro && this.selectedColor && this.tamanio) {
           this.isLoaded = false
           ti = this.titulo
@@ -112,9 +123,8 @@
             this.cat = await (
                 `https://cataas.com/cat/gif/says/${ti}?filter=${fi}&color=${co}&size=${ta}&type=or`
             )
-            console.log(`https://cataas.com/cat/gif/says/${ti}?filter=${fi}&color=${co}&size=${ta}&type=or`)
           } catch (error) {
-            // console.log(error)
+            console.warn(error)
           }
         }
       },
@@ -139,5 +149,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
 }
 </style>
