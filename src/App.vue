@@ -85,7 +85,7 @@
         selectedColor: '',
         optionsColor: [
           {text: 'Naranjo', value: 'orange'},
-          {text: 'Blanco', value: 'white'},
+          {text: 'Negro', value: 'black'},
           {text: 'Rojo', value: 'red'},
           {text: 'Verde', value: 'green'},
           {text: 'Amarillo', value: 'yellow'},
@@ -130,7 +130,7 @@
       },
       onImgLoad() {
         this.isLoaded = true
-      }
+      },
     },
     created() {
       this.titulo = 'holi'
