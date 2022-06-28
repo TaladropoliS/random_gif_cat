@@ -128,22 +128,40 @@
       },
     },
     methods: {
-      async llamarCat(ti, fi, co, ta) {
+      // async llamarCat(ti, fi, co, ta) {
+      //   if (this.titulo && this.selectedFiltro && this.selectedColor && this.tamanio) {
+      //     this.isLoaded = false
+      //     ti = this.titulo
+      //     fi = this.selectedFiltro
+      //     co = this.selectedColor
+      //     ta = this.tamanio
+      //     try {
+      //       this.cat = await (
+      //           `https://cataas.com/cat/gif/says/${ti}?filter=${fi}&color=${co}&size=${ta}&type=or`
+      //       )
+      //     } catch (error) {
+      //       console.warn(error)
+      //     }
+      //   }
+      // },
+
+
+      llamarCat(ti, fi, co, ta) {
         if (this.titulo && this.selectedFiltro && this.selectedColor && this.tamanio) {
           this.isLoaded = false
           ti = this.titulo
           fi = this.selectedFiltro
           co = this.selectedColor
-          ta = this.tamanio
-          try {
-            this.cat = await (
-                `https://cataas.com/cat/gif/says/${ti}?filter=${fi}&color=${co}&size=${ta}&type=or`
-            )
-          } catch (error) {
-            console.warn(error)
-          }
+          ta = this.tamanio;
+          fetch(`https://cataas.com/cat/gif/says/${ti}?filter=${fi}&color=${co}&size=${ta}&type=or`)
+              .then((response) => response.url)
+              .then((data) => {
+                console.log(data)
+                this.cat = data
+              })
         }
       },
+
       onImgLoad() {
         this.isLoaded = true
       },
