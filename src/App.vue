@@ -69,23 +69,23 @@
         </button>
       </div>
 
-      <div class="card-img mb-3">
-        <img v-show="isLoaded" v-if="this.cat" :src="this.cat" @load="onImgLoad" alt="gato"
-             class="img-fluid rounded-3">
-        <div v-show="!isLoaded" class="spinner-border text-secondary" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
+
+      <GatoVue :isLoaded="isLoaded"
+               :cat="this.cat"/>
+
     </div>
 
   </div>
 </template>
 
 <script>
+  import GatoVue from "@/components/GatoVue";
 
   export default {
     name: 'App',
-    components: {},
+    components: {
+      GatoVue
+    },
     data() {
       return {
         cat: '',
