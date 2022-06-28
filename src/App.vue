@@ -69,9 +69,9 @@
         </button>
       </div>
 
-      <div class="card-img">
+      <div class="card-img mb-3">
         <img v-show="isLoaded" v-if="this.cat" :src="this.cat" @load="onImgLoad" alt="gato"
-             class="img-fluid">
+             class="img-fluid rounded-3">
         <div v-show="!isLoaded" class="spinner-border text-secondary" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
@@ -110,10 +110,6 @@
           {text: 'Pixel', value: 'pixel'},
         ],
         isLoaded: false,
-        ti:'',
-        fi:'',
-        co:'',
-        ta:'',
       }
     },
     computed: {
@@ -155,9 +151,9 @@
     created() {
       this.titulo = 'rex'
       this.selectedFiltro = 'paint'
-      this.selectedColor = 'indigo'
+      this.selectedColor = 'red'
       this.tamanio = '100'
-      this.llamarCat('holi', 'sepia', 'orange', '80')
+      this.llamarCat(this.titulo, this.selectedFiltro, this.selectedColor, this.tamanio)
     }
   }
 </script>
